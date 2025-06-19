@@ -49,8 +49,8 @@ public class BusManagementDashboard extends JFrame {
         JPanel row1 = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 10));
         row1.setBackground(Color.WHITE);
 
-        row1.add(createSmallButton("View Schedule", new Color(25, 118, 210), () -> openScreen("BusScheduleScreen")));
-        row1.add(createSmallButton("View Reservations", new Color(46, 125, 50), () -> openScreen("ViewReservationScreen")));
+        row1.add(createSmallButton("View Schedule", new Color(25, 118, 210), () -> openPlaceholder("Bus Schedule")));
+        row1.add(createSmallButton("View Reservations", new Color(46, 125, 50), () -> openViewReservations()));
         row1.add(createSmallButton("Manage Drivers", new Color(255, 143, 0), () -> openPlaceholder("Manage Drivers")));
         row1.add(createSmallButton("Manage Buses", new Color(0, 121, 107), () -> openPlaceholder("Manage Buses")));
 
@@ -58,8 +58,7 @@ public class BusManagementDashboard extends JFrame {
         JPanel row2 = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 10));
         row2.setBackground(Color.WHITE);
 
-        row2.add(createSmallButton("Reserve Bus/Edit,Cancel", new Color(156, 39, 176), () -> openPlaceholder("Reserve Bus/Edit,Cancel")));
-
+        row2.add(createSmallButton("Reserve Bus/Edit,Cancel", new Color(156, 39, 176), () -> openReservationSystem()));
         row2.add(createSmallButton("Maintenance", new Color(100, 221, 23), () -> openPlaceholder("Maintenance")));
         row2.add(createSmallButton("Manage Routes", new Color(3, 169, 244), () -> openPlaceholder("Manage Routes")));
 
@@ -99,22 +98,17 @@ public class BusManagementDashboard extends JFrame {
         dispose();
         new PlaceholderScreen(screenTitle).setVisible(true);
     }
-//Dynamically switches to the correct screen (based on name).
-    private void openScreen(String screenName) {
+
+    private void openViewReservations() {
         dispose();
-        switch (screenName) {
-            case "BusScheduleScreen":
-                new BusScheduleScreen().setVisible(true);
-                break;
-            case "ViewReservationScreen":
-                new ViewReservationScreen().setVisible(true);
-                break;
-            default:
-                JOptionPane.showMessageDialog(this, "Screen not found.");
-        }
+        new ViewReservationScreen().setVisible(true);
     }
-//Used for unimplemented features.
-//Shows a label and back button to return to dashboard.
+
+    private void openReservationSystem() {
+        dispose();
+        new ManualBusReservationGUI().setVisible(true);
+    }
+
     // 🔧 Placeholder screen class
     private static class PlaceholderScreen extends JFrame {
         public PlaceholderScreen(String titleText) {
